@@ -89,19 +89,22 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
             closest_point = boundary.interpolate(boundary.project(projected_point))
             # Convert back to lat/lon
             closest_point_latlon = gpd.GeoSeries([closest_point], crs=world.crs).to_crs(epsg=4326).iloc[0]
-            closest_lat = closest_point_latlon.y
-            closest_lon = closest_point_latlon.x
             
-            closest_lat_txt = str(round(closest_lat, 2))
-            closest_lon_txt = str(round(closest_lon, 2))
+            closest_lat_txt = str(round(closest_point_latlon.y, 2))
+            closest_lon_txt = str(round(closest_point_latlon.x, 2))
+
+            if selected_country == "United States of America":
+                selected_country_txt = "United States"
+            else:
+                selected_country_txt = selected_country
 
             if distance_to_border_miles > border_dist_flag:
-                st.write("Object is **" + str(round(distance_to_border_miles, 1)) + " miles (" + str(round(distance_to_border_km, 1)) + " km)** from the nearest " + selected_country + " border (" + closest_lat_txt + ", " + closest_lon_txt + ").")
+                st.write("Object is **" + str(round(distance_to_border_miles, 1)) + " miles (" + str(round(distance_to_border_km, 1)) + " km)** from the nearest " + selected_country_txt + " border (" + closest_lat_txt + ", " + closest_lon_txt + ").")
             else: 
                 dist_to_bord = str(round(distance_to_border_miles, 1))
                 dist_to_bord_km = str(round(distance_to_border_km, 1))
                 st.markdown(
-                    f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Object is **{dist_to_bord} miles ({dist_to_bord_km} km)** from the nearest {selected_country} border ({closest_lat_txt} , {closest_lon_txt}).</span>",
+                    f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Object is **{dist_to_bord} miles ({dist_to_bord_km} km)** from the nearest {selected_country_txt} border ({closest_lat_txt} , {closest_lon_txt}).</span>",
                     unsafe_allow_html=True
                 )
             # Publish link to Google Maps
@@ -110,7 +113,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
                 unsafe_allow_html=True
             )
             st.markdown(
-                f'<a href="https://www.google.com/maps/dir/{lat_value},{lon_value}/{closest_lat},{closest_lon}" target="_blank">Open Path To Border in Maps</a>',
+                f'<a href="https://www.google.com/maps/dir/{lat_value},{lon_value}/{closest_lat_txt},{closest_lon_txt}" target="_blank">Open Path To Border in Maps</a>',
                 unsafe_allow_html=True
             )
             
