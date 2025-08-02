@@ -50,8 +50,10 @@ world = world.to_crs(epsg=3395)
 # Extract sorted list of country names
 country_list = sorted(world['NAME'].unique())
 
-# Create Streamlit dropdown
-selected_country = st.selectbox("Select a country", country_list)
+# Create countries dropdown
+default = 'United States of America'
+
+selected_country = st.selectbox("Select a country", country_list, index=country_list.index(default))
 
 if isinstance(lat_value, (int, float)) and isinstance(long_value, (int, float)):
     if is_location_within_country(lat_value, long_value, selected_country):
@@ -89,6 +91,8 @@ if isinstance(lat_value, (int, float)) and isinstance(long_value, (int, float)):
             f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Object is **NOT** inside **{selected_country}**</span>",
             unsafe_allow_html=True
         )
+    # Publish link to Google Maps
+    
 else:
     st.markdown(
             f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Enter a latitude and longitude</span>",
