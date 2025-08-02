@@ -67,8 +67,15 @@ if st.button("Get Border Proximity"):
 
         # Print the result
         if response.status_code == 200:
-            result = response.json().get("distance_miles")
-            st.success(f"Result from API: {result}")
+            # Check if result is not in country
+            result = response.json().get("notincountry")
+            if result is not None:
+                if selected_country == "United States of America":
+                    st.error("The specified location is not within the United States.")
+                else:
+                    st.error(f"Object is not within {selected_country}")
+            else:
+                st.success(f"Object is {result} miles from the border of {selected_country}.")
         else:
             st.error(f"API error: {response.status_code} - {response.text}")
         
