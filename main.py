@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import geopandas as gpd
-from shapely.geometry import Point
+from shapely import Point
 
 from geolocate import is_location_within_country
 
