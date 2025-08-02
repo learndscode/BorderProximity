@@ -1,10 +1,10 @@
 import streamlit as st
-import pandas as pd
 import geopandas as gpd
 import requests
 from shapely import Point
+import time  # <-- for the delay
 
-from geolocate import is_location_within_country
+#from geolocate import is_location_within_country
 
 st.set_page_config(
     page_title="Border Proximity",
@@ -64,6 +64,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
     if st.button("Get Border Proximity"):
         # Send GET request
         with st.spinner("Calling API..."):
+            time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
             response = requests.get(base_url + endpoint, params=params)
 
         # Print the result
