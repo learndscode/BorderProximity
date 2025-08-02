@@ -63,19 +63,19 @@ params = {"latitude": lat_value, "longitude": lon_value, "country": selected_cou
 if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
     if st.button("Get Border Proximity"):
         # Send GET request
-        with st.spinner("Calling API..."):
+        with st.spinner("Proximity requested..."):
             time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
             response = requests.get(base_url + endpoint, params=params)
 
         # Print the result
         if response.status_code == 200:
             # Check if result is not in country
-            result = response.json().get("notincountry")
-            if result is not None:
-                if selected_country == "United States of America":
-                    st.error("The specified location is not within the United States.")
-                else:
-                    st.error(f"Object is not within **{selected_country}** border.")
+            notInCountry = response.json().get("notincountry")
+            errorMessage = response.json().get("error")
+            if errorMessage is not None:
+                st.error(f"{errorMessage}")
+            elif notInCountry is not None:
+                st.error(f"{notInCountry}")
             else:
                 st.success(f"Object is {result} miles from the border of {selected_country}.")
         else:
