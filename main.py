@@ -1,8 +1,8 @@
 import streamlit as st
 import geopandas as gpd
 import requests
-from shapely import Point
 import time  # <-- for the delay
+from shapely import Point
 
 #from geolocate import is_location_within_country
 
