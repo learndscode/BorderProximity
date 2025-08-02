@@ -77,7 +77,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
             if errorMessage is not None:
                 st.error(f"{errorMessage}")
             elif notInCountry is not None:
-                if country == "United States of America":
+                if selected_country == "United States of America":
                     st.error(f"The specified location is not within the **United States** border.")
                 else:
                     st.error(f"The specified location is not within the **" + selected_country + "** border.")
