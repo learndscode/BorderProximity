@@ -73,7 +73,7 @@ if st.button("Get Border Proximity"):
                 if selected_country == "United States of America":
                     st.error("The specified location is not within the United States.")
                 else:
-                    st.error(f"Object is not within {selected_country}")
+                    st.error(f"Object is not within **{selected_country}** border.")
             else:
                 st.success(f"Object is {result} miles from the border of {selected_country}.")
         else:
