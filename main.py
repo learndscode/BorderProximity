@@ -72,12 +72,14 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
             # Check if result is not in country
             notInCountry = response.json().get("notincountry")
             errorMessage = response.json().get("error")
+            distance_miles = response.json().get("distance_miles")
+            distance_km = response.json().get("distance_km")
             if errorMessage is not None:
                 st.error(f"{errorMessage}")
             elif notInCountry is not None:
                 st.error(f"{notInCountry}")
             else:
-                st.success(f"Object is {result} miles from the border of {selected_country}.")
+                st.success(f"Object is {distance_miles} miles from the border of {selected_country}.")
         else:
             st.error(f"API error: {response.status_code} - {response.text}")       
 else:
