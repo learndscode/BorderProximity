@@ -63,7 +63,8 @@ if st.button("Get Border Proximity"):
         params = {"latitude": lat_value, "longitude": lon_value, "country": selected_country}
 
         # Send GET request
-        response = requests.get(base_url + endpoint, params=params)
+        with st.spinner("Calling API..."):
+            response = requests.get(base_url + endpoint, params=params)
 
         # Print the result
         if response.status_code == 200:
