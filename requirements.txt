@@ -1,0 +1,6 @@
+streamlit
+pandas
+geopandas
+shapely.geometry
+pycountry
+reverse_geocoder
