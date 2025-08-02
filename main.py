@@ -67,7 +67,7 @@ if st.button("Get Border Proximity"):
 
         # Print the result
         if response.status_code == 200:
-            result = response.json().get("result")
+            result = response.json().get("distance_miles")
             st.success(f"Result from API: {result}")
         else:
             st.error(f"API error: {response.status_code} - {response.text}")
