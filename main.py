@@ -54,24 +54,26 @@ default = 'United States of America'
 
 selected_country = st.selectbox("Select a country", country_list, index=country_list.index(default))
 
-if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
-    # Base URL of your deployed API
-    base_url = "https://borderproximityapi.onrender.com"
-    # Define endpoint and parameters
-    endpoint = "/getborderproximity"
-    params = {"latitude": lat_value, "longitude": lon_value, "country": selected_country}
+if st.button("Get Border Proximity"):
+    if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
+        # Base URL of your deployed API
+        base_url = "https://borderproximityapi.onrender.com"
+        # Define endpoint and parameters
+        endpoint = "/getborderproximity"
+        params = {"latitude": lat_value, "longitude": lon_value, "country": selected_country}
 
-    # Send GET request
-    response = requests.get(base_url + endpoint, params=params)
+        # Send GET request
+        response = requests.get(base_url + endpoint, params=params)
 
-    # Print the result
-    if response.status_code == 200:
-        print(response.json())  # e.g., {'result': 8}
+        # Print the result
+        if response.status_code == 200:
+            result = response.json().get("result")
+            st.success(f"Result from API: {result}")
+        else:
+            st.error(f"API error: {response.status_code} - {response.text}")
+        
     else:
-        print(f"Error: {response.status_code}, {response.text}")
-    
-else:
-    st.markdown(
-            f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Enter a latitude and longitude</span>",
-            unsafe_allow_html=True
-    )
+        st.markdown(
+                f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Enter a latitude and longitude</span>",
+                unsafe_allow_html=True
+        )
