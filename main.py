@@ -42,7 +42,6 @@ lon_value = st.number_input(
 # Set zoom level
 zoom_level = 10
 
-
 # Path to the downloaded and extracted shapefile
 shapefile_path = "data/ne_110m_admin_0_countries.shp"
 
