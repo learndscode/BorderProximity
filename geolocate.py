@@ -18,3 +18,4 @@ def is_location_within_country(lat, lon, country_selected):
         return country.iloc[0]['NAME'] == country_selected
     else:
         return False
+
