@@ -82,7 +82,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
                 else:
                     st.error(f"The specified location is not within the **" + selected_country + "** border.")
             else:
-                st.success(f"Object is {distance_miles} miles from the border of {selected_country}.")
+                st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of {selected_country}.")
         else:
             st.error(f"API error: {response.status_code} - {response.text}")       
 else:
