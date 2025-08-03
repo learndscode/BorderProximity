@@ -61,11 +61,11 @@ butcol1, butcol2, spacer_right = st.columns([1, 3, 1])
 if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
     with butcol1:
         if st.button("Get Border Proximity"):
-            show_api = False  # Reset the button state
+            #show_api = False  # Reset the button state
             call_api = True        
     with butcol2:
         if st.button("Show border proximity API call"):
-            call_api = False  # Reset the results state    
+            #call_api = False  # Reset the results state    
             show_api = True
     
     # Display results if the API call was successful
