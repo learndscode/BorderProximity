@@ -13,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="auto" # Optional: Control the initial state of the sidebar
 )
 
-st.title("How Close Am I To The Border?")
+st.title("How Close Is an Object to the Border?")
 
 # border_dist_flag = st.number_input(
 #     label="Enter a border proximity flag (in miles)",
