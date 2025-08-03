@@ -2,12 +2,8 @@ import streamlit as st
 import geopandas as gpd
 import requests
 import time  # <-- for the delay
-import folium
 
-from streamlit_folium import st_folium
 from shapely import Point
-
-#from geolocate import is_location_within_country
 
 st.set_page_config(
     page_title="Border Proximity",
@@ -86,17 +82,6 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
                     f'<a href="{map_path_link}" target="_blank">Open Path To Border in Maps</a>',
                     unsafe_allow_html=True
                 )
-
-                # Create a Folium map centered at object's location
-                m = folium.Map(location=[lat_value, lon_value], zoom_start=8)
-                # Add a marker
-                folium.Marker(
-                    location=[lat_value, lon_value],
-                    popup="Object Location",
-                    tooltip=""
-                ).add_to(m)
-                # Render the map in Streamlit
-                st_data = st_folium(m, width=700, height=500)
         else:
             st.error(f"API error: {response.status_code} - {response.text}")       
 else:
