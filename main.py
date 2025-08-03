@@ -36,24 +36,24 @@ lon_value = st.number_input(
 )
 
 # Path to the downloaded and extracted shapefile
-shapefile_path = "data/ne_110m_admin_0_countries.shp"
+#shapefile_path = "data/ne_110m_admin_0_countries.shp"
 
 # Load the shapefile
-world = gpd.read_file(shapefile_path)
+#world = gpd.read_file(shapefile_path)
 
 # Extract sorted list of country names
-country_list = sorted(world['NAME'].unique())
+#country_list = sorted(world['NAME'].unique())
 
 # Create countries dropdown
-default = 'United States of America'
+#default = 'United States of America'
 
-selected_country = st.selectbox("Select a country", country_list, index=country_list.index(default))
+#selected_country = st.selectbox("Select a country", country_list, index=country_list.index(default))
 
 # Base URL of your deployed API
 base_url = "https://borderproximityapi.onrender.com"
 # Define endpoint and parameters
 endpoint = "/getborderproximity"
-params = {"latitude": lat_value, "longitude": lon_value, "country": selected_country}
+params = {"latitude": lat_value, "longitude": lon_value}
 
 # Create columns: [left spacer, col1, tiny spacer, col2, right spacer]
 butcol1, butcol2, spacer_right = st.columns([0.75, 3, 1])
@@ -74,10 +74,10 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
         with st.spinner("Proximity requested..."):
             time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
             response = requests.get(base_url + endpoint, params=params)
-            display_results(response, selected_country)
+            display_results(response)
     if show_api:
         #st.markdown("---")  # Optional horizontal rule       
-        st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}&country={selected_country}`")
+        st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}`")
 else:
     st.markdown(
             f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Enter a latitude and longitude</span>",
