@@ -12,7 +12,7 @@ def display_results(response, lat, lon):
         if errorMessage is not None:
             st.error(f"{errorMessage}")
         elif notInCountry is not None:
-            #st.error(f"The specified location is not within the borders of a country. It is likely on a boat or at the bottom of the ocean.")
+            st.error(f"The specified location is not within the borders of a country. It is likely on a boat or at the bottom of the ocean.")
             error_message = "The specified location is not within the borders of a country. It is likely on a boat or at the bottom of the ocean."
             st.markdown(
                 """
