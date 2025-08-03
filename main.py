@@ -57,6 +57,7 @@ butcol1, butcol2 = st.columns([1,1])
 if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
     with butcol1:
         if st.button("Get Border Proximity"):
+            show_api = False  # Reset the button state
             # Send GET request
             with st.spinner("Proximity requested..."):
                 time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
