@@ -15,13 +15,13 @@ st.set_page_config(
 
 st.title("How Close Am I To The Border?")
 
-border_dist_flag = st.number_input(
-    label="Enter a border proximity flag (in miles)",
-    min_value=0.0,
-    max_value=1000.0,
-    value=10.0,     # default
-    step=0.5
-)
+# border_dist_flag = st.number_input(
+#     label="Enter a border proximity flag (in miles)",
+#     min_value=0.0,
+#     max_value=1000.0,
+#     value=10.0,     # default
+#     step=0.5
+# )
 
 # Get longitude and latitude coordinates
 lat_value = st.number_input(
