@@ -12,7 +12,16 @@ def display_results(response, lat, lon):
         if errorMessage is not None:
             st.error(f"{errorMessage}")
         elif notInCountry is not None:
-            st.error(f"The specified location is not within the borders of a country. It is likely on a boat or at the bottom of the ocean.")
+            #st.error(f"The specified location is not within the borders of a country. It is likely on a boat or at the bottom of the ocean.")
+            error_message = "The specified location is not within the borders of a country. It is likely on a boat or at the bottom of the ocean."
+            st.markdown(
+                """
+                <div style="padding: 1em; background-color: #e0f3ff; border-left: 5px solid #2196F3; border-radius: 4px;">
+                <strong>Info:</strong> This is a light blue message box similar to st.success().
+                </div>
+                """,
+            unsafe_allow_html=True
+    ) 
             map_path_link = "https://www.google.com/maps?q={},{}".format(lat, lon)
             st.markdown(
                 f'<a href="{map_path_link}" target="_blank">Open in Maps</a>',
