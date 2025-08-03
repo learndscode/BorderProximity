@@ -74,6 +74,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
             errorMessage = response.json().get("error")
             distance_miles = response.json().get("distance_miles")
             distance_km = response.json().get("distance_km")
+            map_path_link = response.json().get("map_path_link")
             if errorMessage is not None:
                 st.error(f"{errorMessage}")
             elif notInCountry is not None:
@@ -86,6 +87,10 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
                     st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of the United States.")
                 else:
                     st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of {selected_country}.")
+                st.markdown(
+                    f'<a href="{map_path_link}" target="_blank">Open Path To Border in Maps</a>',
+                    unsafe_allow_html=True
+                )
         else:
             st.error(f"API error: {response.status_code} - {response.text}")       
 else:
