@@ -52,7 +52,7 @@ endpoint = "/getborderproximity"
 params = {"latitude": lat_value, "longitude": lon_value, "country": selected_country}
 
 # Create two columns
-butcol1, butcol2 = st.columns(2)
+butcol1, butcol2 = st.columns([1,1])
 
 if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
     with butcol1:
