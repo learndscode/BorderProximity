@@ -8,7 +8,6 @@ def display_results(response):
         errorMessage = response.json().get("error")
         distance_miles = response.json().get("distance_miles")
         distance_km = response.json().get("distance_km")
-        selected_country = response.json().get("country")
         map_path_link = response.json().get("map_path_link")
         if errorMessage is not None:
             st.error(f"{errorMessage}")
@@ -22,10 +21,10 @@ def display_results(response):
             #     else:
             #         st.error(f"The specified location is not within **{selected_country}&#39;s** borders. It is located in **{locatedCountry}**.")
         else:
-            if selected_country == "United States of America":
+            if locatedCountry == "United States of America":
                 st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of the United States.")
             else:
-                st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of {selected_country}.")
+                st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of {locatedCountry}.")
             st.markdown(
                 f'<a href="{map_path_link}" target="_blank">Open Path To Border in Maps</a>',
                 unsafe_allow_html=True
