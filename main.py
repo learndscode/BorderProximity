@@ -14,10 +14,6 @@ st.set_page_config(
 
 st.title("How Close Is an Object to the Border?")
 
-# Initialize display state
-if "show_api" not in st.session_state:
-    st.session_state.show_api = False
-
 # Get longitude and latitude coordinates
 lat_value = st.number_input(
     label="Enter Object's Latitude",
@@ -61,7 +57,7 @@ butcol1, butcol2 = st.columns([1,1])
 if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
     with butcol1:
         if st.button("Get Border Proximity"):
-            st.session_state.show_api = False
+            show_api = False  # Reset the button state
             # Send GET request
             with st.spinner("Proximity requested..."):
                 time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
@@ -94,11 +90,10 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
             else:
                 st.error(f"API error: {response.status_code} - {response.text}")
     with butcol2:
-        if st.button("Show border proximity API call"):
-            st.session_state.show_api = True       
-    if st.session_state.show_api:
-        #st.markdown("---")  # Optional horizontal rule       
-        st.code(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}&country={selected_country}`")
+        show_api = st.button("Show border proximity API call")            
+    if show_api:
+        st.markdown("---")  # Optional horizontal rule       
+        st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}&country={selected_country}`")
 else:
     st.markdown(
             f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Enter a latitude and longitude</span>",
