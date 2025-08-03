@@ -87,7 +87,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
                     unsafe_allow_html=True
                 )
 
-                # Create a Folium map centered at New York City
+                # Create a Folium map centered at object's location
                 m = folium.Map(location=[lat_value, lon_value], zoom_start=8)
                 # Add a marker
                 folium.Marker(
