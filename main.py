@@ -74,7 +74,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
         with st.spinner("Proximity requested..."):
             time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
             response = requests.get(base_url + endpoint, params=params)
-            display_results(response)
+            display_results(response, lat_value, lon_value)
     if show_api:
         #st.markdown("---")  # Optional horizontal rule       
         st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}`")

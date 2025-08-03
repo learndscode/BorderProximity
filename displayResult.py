@@ -1,6 +1,6 @@
 import streamlit as st
 
-def display_results(response):
+def display_results(response, lat, lon):
     if response.status_code == 200:
         # Check if result is not in country
         notInCountry = response.json().get("notincountry")
@@ -13,6 +13,11 @@ def display_results(response):
             st.error(f"{errorMessage}")
         elif notInCountry is not None:
             st.error(f"The specified location is not within the borders of a country. It is likely on a boat or at the bottom of the ocean.")
+            map_path_link = "https://www.google.com/maps?q={},{}".format(lat, lon)
+            st.markdown(
+                f'<a href="{map_path_link}" target="_blank">Open in Maps</a>',
+                unsafe_allow_html=True
+            )
             # if selected_country == "United States of America":
             #     st.error(f"The specified location is not within the **United States&#39;** borders. It is located in **{locatedCountry}**.")
             # else:
