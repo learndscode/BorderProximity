@@ -49,7 +49,7 @@ default = 'United States of America'
 
 selected_country = st.selectbox("Select a country", country_list, index=country_list.index(default))
 
- # Base URL of your deployed API
+# Base URL of your deployed API
 base_url = "https://borderproximityapi.onrender.com"
 # Define endpoint and parameters
 endpoint = "/getborderproximity"
