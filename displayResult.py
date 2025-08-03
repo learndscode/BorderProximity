@@ -21,8 +21,9 @@ def display_results(response, lat, lon):
                 {error_message}
                 </div>
                 """,
-            unsafe_allow_html=True
-    ) 
+                unsafe_allow_html=True
+            )
+            st.markdown("&nbsp;") 
             map_path_link = "https://www.google.com/maps?q={},{}".format(lat, lon)
             st.markdown(
                 f'<a href="{map_path_link}" target="_blank">Open in Maps</a>',
