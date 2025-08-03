@@ -4,6 +4,7 @@ import requests
 import time  # <-- for the delay
 
 from shapely import Point
+from displayResult import display_results
 
 st.set_page_config(
     page_title="Border Proximity",
@@ -13,6 +14,9 @@ st.set_page_config(
 )
 
 st.title("How Close Is an Object to the Border?")
+
+show_results = False  # Initialize the results state
+show_api = False  # Initialize the button state
 
 # Get longitude and latitude coordinates
 lat_value = st.number_input(
@@ -62,35 +66,15 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
             with st.spinner("Proximity requested..."):
                 time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
                 response = requests.get(base_url + endpoint, params=params)
-
-            # Print the result
-            if response.status_code == 200:
-                # Check if result is not in country
-                notInCountry = response.json().get("notincountry")
-                errorMessage = response.json().get("error")
-                distance_miles = response.json().get("distance_miles")
-                distance_km = response.json().get("distance_km")
-                map_path_link = response.json().get("map_path_link")
-                if errorMessage is not None:
-                    st.error(f"{errorMessage}")
-                elif notInCountry is not None:
-                    if selected_country == "United States of America":
-                        st.error(f"The specified location is not within the **United States&#39;s** borders.")
-                    else:
-                        st.error(f"The specified location is not within **" + selected_country + "&#39;s** borders.")
-                else:
-                    if selected_country == "United States of America":
-                        st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of the United States.")
-                    else:
-                        st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of {selected_country}.")
-                    st.markdown(
-                        f'<a href="{map_path_link}" target="_blank">Open Path To Border in Maps</a>',
-                        unsafe_allow_html=True
-                    )
-            else:
-                st.error(f"API error: {response.status_code} - {response.text}")
+                show_results = True
     with butcol2:
-        show_api = st.button("Show border proximity API call")            
+        if st.button("Show border proximity API call"):
+            show_results = False  # Reset the results state    
+            show_api = True
+    
+    # Display results if the API call was successful
+    if show_results:
+        display_results(response, selected_country)
     if show_api:
         st.markdown("---")  # Optional horizontal rule       
         st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}&country={selected_country}`")
