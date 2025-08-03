@@ -17,13 +17,12 @@ def display_results(response, lat, lon):
             #border-left: 5px solid #2196F3;
             st.markdown(
                 f"""
-                <div style="padding: 1em; background-color: #e0f3ff; border-radius: 8px; color: #0b3d91;">
+                <div style="padding: 1em; background-color: #e0f3ff; border-radius: 8px; color: #0b3d91; margin-bottom: 0.75em;">
                 {error_message}
                 </div>
                 """,
                 unsafe_allow_html=True
             )
-            st.markdown("&nbsp;") 
             map_path_link = "https://www.google.com/maps?q={},{}".format(lat, lon)
             st.markdown(
                 f'<a href="{map_path_link}" target="_blank">Open in Maps</a>',
