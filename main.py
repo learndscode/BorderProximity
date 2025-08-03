@@ -89,8 +89,10 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
             else:
                 st.error(f"API error: {response.status_code} - {response.text}")
     with butcol2:
-        if st.button("Show border proximity API call"):
-            st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}&country={selected_country}`")
+        show_api = st.button("Show border proximity API call")            
+    if show_api:
+        st.markdown("---")  # Optional horizontal rule       
+        st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}&country={selected_country}`")
 else:
     st.markdown(
             f"<span style='color: #c00000; background-color: #ffc7cf; padding: 4px;'>Enter a latitude and longitude</span>",
