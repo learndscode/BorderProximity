@@ -2,6 +2,9 @@ import streamlit as st
 import geopandas as gpd
 import requests
 import time  # <-- for the delay
+import folium
+
+from streamlit_folium import st_folium
 from shapely import Point
 
 #from geolocate import is_location_within_country
@@ -14,14 +17,6 @@ st.set_page_config(
 )
 
 st.title("How Close Is an Object to the Border?")
-
-# border_dist_flag = st.number_input(
-#     label="Enter a border proximity flag (in miles)",
-#     min_value=0.0,
-#     max_value=1000.0,
-#     value=10.0,     # default
-#     step=0.5
-# )
 
 # Get longitude and latitude coordinates
 lat_value = st.number_input(
@@ -91,6 +86,17 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
                     f'<a href="{map_path_link}" target="_blank">Open Path To Border in Maps</a>',
                     unsafe_allow_html=True
                 )
+
+                # Create a Folium map centered at New York City
+                m = folium.Map(location=[lat_value, lon_value], zoom_start=8)
+                # Add a marker
+                folium.Marker(
+                    location=[40.7128, -74.0060],
+                    popup="Object Location",
+                    tooltip=""
+                ).add_to(m)
+                # Render the map in Streamlit
+                st_data = st_folium(m, width=700, height=500)
         else:
             st.error(f"API error: {response.status_code} - {response.text}")       
 else:
