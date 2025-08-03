@@ -51,8 +51,9 @@ base_url = "https://borderproximityapi.onrender.com"
 endpoint = "/getborderproximity"
 params = {"latitude": lat_value, "longitude": lon_value, "country": selected_country}
 
-# Create two columns
-butcol1, butcol2 = st.columns([1,1])
+# Create columns: [left spacer, col1, tiny spacer, col2, right spacer]
+spacer_left, butcol1, spacer_mid, butcol2, spacer_right = st.columns([1, 3, 0.1, 3, 1])
+
 
 if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
     with butcol1:
