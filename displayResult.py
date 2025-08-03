@@ -18,7 +18,7 @@ def display_results(response, lat, lon):
             st.markdown(
                 f"""
                 <div style="padding: 1em; background-color: #e0f3ff; border-radius: 8px; color: #0b3d91;">
-                <strong>Info:</strong> {error_message}
+                {error_message}
                 </div>
                 """,
             unsafe_allow_html=True
