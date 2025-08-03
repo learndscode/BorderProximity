@@ -91,7 +91,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
                 m = folium.Map(location=[lat_value, lon_value], zoom_start=8)
                 # Add a marker
                 folium.Marker(
-                    location=[40.7128, -74.0060],
+                    location=[lat_value, lon_value],
                     popup="Object Location",
                     tooltip=""
                 ).add_to(m)
