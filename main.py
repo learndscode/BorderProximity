@@ -15,7 +15,7 @@ st.set_page_config(
 
 st.title("How Close Is an Object to the Border?")
 
-show_results = False  # Initialize the results state
+call_api = False  # Initialize the results state
 show_api = False  # Initialize the button state
 
 # Get longitude and latitude coordinates
@@ -62,19 +62,19 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
     with butcol1:
         if st.button("Get Border Proximity"):
             show_api = False  # Reset the button state
-            # Send GET request
-            with st.spinner("Proximity requested..."):
-                time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
-                response = requests.get(base_url + endpoint, params=params)
-                show_results = True
+            call_api = True        
     with butcol2:
         if st.button("Show border proximity API call"):
-            show_results = False  # Reset the results state    
+            call_api = False  # Reset the results state    
             show_api = True
     
     # Display results if the API call was successful
-    if show_results:
-        display_results(response, selected_country)
+    if call_api:
+        # Send GET request
+        with st.spinner("Proximity requested..."):
+            time.sleep(0.1)  # slight delay gives Streamlit time to render spinner
+            response = requests.get(base_url + endpoint, params=params)
+            display_results(response, selected_country)
     if show_api:
         st.markdown("---")  # Optional horizontal rule       
         st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}&country={selected_country}`")
