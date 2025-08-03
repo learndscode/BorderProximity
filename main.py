@@ -76,7 +76,7 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
             response = requests.get(base_url + endpoint, params=params)
             display_results(response, selected_country)
     if show_api:
-        st.markdown("---")  # Optional horizontal rule       
+        #st.markdown("---")  # Optional horizontal rule       
         st.write(f"API Call: `{base_url + endpoint}?latitude={lat_value}&longitude={lon_value}&country={selected_country}`")
 else:
     st.markdown(
