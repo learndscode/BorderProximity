@@ -16,7 +16,7 @@ def display_results(response, lat, lon):
             error_message = "The specified location is not within the borders of a country. It is likely on a boat or at the bottom of the ocean."
             #border-left: 5px solid #2196F3;
             st.markdown(
-                """
+                f"""
                 <div style="padding: 1em; background-color: #e0f3ff; border-radius: 8px; color: #0b3d91;">
                 <strong>Info:</strong> {error_message}
                 </div>
