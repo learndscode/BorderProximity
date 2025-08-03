@@ -13,7 +13,7 @@ st.set_page_config(
     initial_sidebar_state="auto" # Optional: Control the initial state of the sidebar
 )
 
-st.title("How Close Is an Object to the Border?")
+st.title("How close is the Object to the Border?")
 
 call_api = False  # Initialize the results state
 show_api = False  # Initialize the button state
