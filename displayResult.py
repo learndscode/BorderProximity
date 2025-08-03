@@ -17,7 +17,7 @@ def display_results(response, lat, lon):
             #border-left: 5px solid #2196F3;
             st.markdown(
                 """
-                <div style="padding: 1em; background-color: #e0f3ff; border-radius: 4px; color: #0b3d91;">
+                <div style="padding: 1em; background-color: #e0f3ff; border-radius: 8px; color: #0b3d91;">
                 <strong>Info:</strong> This is a light blue message box similar to st.success().
                 </div>
                 """,
