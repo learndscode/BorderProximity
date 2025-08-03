@@ -70,9 +70,9 @@ if isinstance(lat_value, (int, float)) and isinstance(lon_value, (int, float)):
                 st.error(f"{errorMessage}")
             elif notInCountry is not None:
                 if selected_country == "United States of America":
-                    st.error(f"The specified location is not within the **United States** border.")
+                    st.error(f"The specified location is not within the **United States&#39;s** border.")
                 else:
-                    st.error(f"The specified location is not within the **" + selected_country + "** border.")
+                    st.error(f"The specified location is not within **" + selected_country + "&#39;s** border.")
             else:
                 if selected_country == "United States of America":
                     st.success(f"Object is **{distance_miles}** miles ({distance_km} km) from the closest border of the United States.")
